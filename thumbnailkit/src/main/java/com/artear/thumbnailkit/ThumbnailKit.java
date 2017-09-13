@@ -8,6 +8,6 @@ import android.util.Log;
 
 public class ThumbnailKit {
     public static void Track(){
-        Log.d("MultiTrack", "First commit");
+        Log.d("ThumbnailKit", "First commit");
     }
 }

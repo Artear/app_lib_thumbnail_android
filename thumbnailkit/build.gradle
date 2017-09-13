@@ -10,7 +10,7 @@ ext {
     libraryName = 'ThumbnailKit'
     artifact = 'thumbnailkit'
 
-    libraryDescription = 'A library to generate resized image url'
+    libraryDescription = 'Thumbnail Strategy for multi content delivery network'
 
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
