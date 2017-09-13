@@ -7,7 +7,7 @@ ext {
     bintrayName = 'com.artear.thumbnailkit'
 
     publishedGroupId = 'com.artear.thumbnailkit'
-    libraryName = 'ThumbnailKit'
+    libraryName = 'CDNThumbnailKit'
     artifact = 'thumbnailkit'
 
     libraryDescription = 'Thumbnail Strategy for multi content delivery network'
@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.1.0'
 
     developerId = 'artear'
     developerName = 'Artear Moviles'
@@ -32,8 +32,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "alpha"
+        versionCode 2
+        versionName "beta"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

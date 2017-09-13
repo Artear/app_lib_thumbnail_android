@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">App_Library_ANDROID_CDNThumbnailKit</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
