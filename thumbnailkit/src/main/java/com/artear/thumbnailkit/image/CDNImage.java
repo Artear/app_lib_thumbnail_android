@@ -10,8 +10,8 @@ import com.artear.thumbnailkit.CDNThumbnailKit;
  */
 
 public class CDNImage {
-    protected String url;
-    protected CDNThumbnailInterface cdn;
+    private String url;
+    private CDNThumbnailInterface cdn;
 
     public CDNImage(String url){
         this.url = url;

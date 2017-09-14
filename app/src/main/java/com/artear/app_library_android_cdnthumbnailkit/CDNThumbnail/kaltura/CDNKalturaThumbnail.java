@@ -38,7 +38,7 @@ public class CDNKalturaThumbnail implements CDNThumbnailInterface {
 
     private String replaceThumbnail(String url, String thumbnail) {
 
-        String returns = "loqueviene";
+        String returns = url;
         try {
             Matcher m = sPattern.matcher(url);
             if (m.find()) {
