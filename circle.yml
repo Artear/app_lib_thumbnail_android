@@ -65,4 +65,5 @@ deployment:
     release:
       branch: master
       commands:
-        - ./gradlew crashlyticsUploadDistributionRelease
+        - ./gradlew install
+        - ./gradlew bintrayUpload
