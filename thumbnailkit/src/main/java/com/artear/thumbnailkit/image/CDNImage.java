@@ -1,7 +1,5 @@
 package com.artear.thumbnailkit.image;
 
-import android.util.Log;
-
 import com.artear.thumbnailkit.CDNThumbnailInterface;
 import com.artear.thumbnailkit.CDNThumbnailKit;
 
@@ -13,7 +11,7 @@ public class CDNImage {
     private String url;
     private CDNThumbnailInterface cdn;
 
-    public CDNImage(String url){
+    public CDNImage(String url) {
         this.url = url;
         this.cdn = CDNThumbnailKit.getInstance().getCDN(url);
     }
@@ -30,6 +28,9 @@ public class CDNImage {
     }
 
     public String getURL(CDNThumbnail thumbnail) {
+        if (thumbnail == null) {
+            return getURL(false);
+        }
         return this.cdn.thumbnail(this.url, thumbnail);
     }
 }

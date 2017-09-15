@@ -8,10 +8,6 @@ import com.artear.thumbnailkit.image.CDNThumbnail;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by sergiobanares on 13/9/17.
- */
-
 public class CDNKalturaThumbnail implements CDNThumbnailInterface {
 
 
@@ -51,7 +47,7 @@ public class CDNKalturaThumbnail implements CDNThumbnailInterface {
                         "/thumbnail/entry_id/" +
                         m.group(4) +
 
-                        ((thumbnail != null && !thumbnail.equals("")) ? "/"+thumbnail : "");
+                        ((thumbnail != null && !thumbnail.equals("")) ? "/" + thumbnail : "");
             }
 
         } catch (Exception ignored) {

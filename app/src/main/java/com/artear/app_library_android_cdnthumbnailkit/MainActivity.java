@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.artear.thumbnailkit.image.CDNImage;
 import com.artear.thumbnailkit.image.CDNThumbnail;
+import com.artear.thumbnailkit.strategy.DefaultStrategy;
+import com.artear.thumbnailkit.strategy.StrategyInterface;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         });
         /* // Default Template // */
 
+        StrategyInterface cdnStrategy = new DefaultStrategy();
+        cdnStrategy.add(new CDNThumbnail(96, 96, CDNThumbnail.Types.center));
+        cdnStrategy.add(new CDNThumbnail(300, 300, CDNThumbnail.Types.center));
+        cdnStrategy.add(new CDNThumbnail(96, 96, CDNThumbnail.Types.center));
 
 
         String[] images = new String[3];
@@ -40,16 +46,16 @@ public class MainActivity extends AppCompatActivity {
         images[2] = "https://vignette.wikia.nocookie.net/rockosmodernlife/images/5/5e/Rocko_Wallaby.png";
 
         int count = 0;
-        for (String image:images ){
+        for (String image : images) {
             count++;
-            Log.e("MainActivity","Image: "+ count);
+            Log.e("MainActivity", "Image: " + count);
             CDNImage imageOne = new CDNImage(image);
 
-            Log.e("MainActivity","[   IMAGE   ]> "+ imageOne.getURL());
-            Log.e("MainActivity","[  ORIGINAL  ]> "+ imageOne.getURL(true));
-            Log.e("MainActivity","[   96X96   ]> "+ imageOne.getURL(new CDNThumbnail(96, 96, CDNThumbnail.Types.center) ));
+            Log.e("MainActivity", "[   IMAGE   ]> " + imageOne.getURL());
+            Log.e("MainActivity", "[  ORIGINAL  ]> " + imageOne.getURL(true));
+            Log.e("MainActivity", "[   96X96   ]> " + imageOne.getURL(cdnStrategy.getCDNThumbnail(250, 250)));
 
-            Log.e("MainActivity"," ------ ");
+            Log.e("MainActivity", " ------ ");
         }
 
 
