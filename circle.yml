@@ -9,6 +9,7 @@ machine:
         ANDROID_HOME: /usr/local/android-sdk-linux
 
 dependencies:
+
     override:
 
         - if ! $(grep -q "Revision=44" $ANDROID_HOME/extras/google/google_play_services/source.properties);
