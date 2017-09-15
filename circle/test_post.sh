@@ -14,14 +14,14 @@ function copy_test_reports {
     echo "+------------------------------------------+"
 	echo "- Copy Test Reports"
 	echo "+------------------------------------------+"
-	cp -r /home/ubuntu/tn_2016_android/app/build/test-results/release $CIRCLE_TEST_REPORTS
+	#cp -r /home/ubuntu/tn_2016_android/app/build/test-results/release $CIRCLE_TEST_REPORTS
 }
 
 function copy_apks {
 	echo "+------------------------------------------+"
 	echo "- Copy APKs"
 	echo "+------------------------------------------+"
-	cp -r /home/ubuntu/tn_2016_android/app/build/outputs/apk/ $CIRCLE_ARTIFACTS
+	#cp -r /home/ubuntu/tn_2016_android/app/build/outputs/apk/ $CIRCLE_ARTIFACTS
 }
 
 description
