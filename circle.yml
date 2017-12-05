@@ -12,15 +12,15 @@ dependencies:
 
     override:
 
-        - if ! $(grep -q "Revision=44" $ANDROID_HOME/extras/google/google_play_services/source.properties);
+        - if ! $(grep -q "Revision=46" $ANDROID_HOME/extras/google/google_play_services/source.properties);
               then echo y | android update sdk --no-ui --all --filter extra-google-google_play_services;
           fi
 
         - if ! $(grep -q "Revision=58" $ANDROID_HOME/extras/google/m2repository/source.properties);
-              then echo y | android update sdk --no-ui --all --filter extra-google-m2repository;
+            then echo y | android update sdk --no-ui --all --filter extra-google-m2repository;
           fi
 
-        - if [ ! -d $ANDROID_HOME/extras/android/m2repository/com/android/support/design/25.3.0 ];
+        - if [ ! -d $ANDROID_HOME/extras/android/m2repository/com/android/support/design/25.3.1 ];
             then
               echo y | android update sdk --no-ui --all --filter extra-android-m2repository;
               echo y | android update sdk --no-ui --all --filter extra-android-support;
@@ -34,15 +34,15 @@ dependencies:
             then echo y | android update sdk --no-ui --all --filter android-25;
           fi
 
-        - if [ ! -d $ANDROID_HOME/build-tools/26.0.2 ];
-            then echo y | android update sdk --no-ui --all --filter build-tools-26.0.2;
+        - if [ ! -d $ANDROID_HOME/build-tools/26.0.3 ];
+            then echo y | android update sdk --no-ui --all --filter build-tools-26.0.3;
           fi
 
         - if ! $(grep -q "Revision=26" $ANDROID_HOME/platform-tools/source.properties);
             then echo y | android update sdk --no-ui --all --filter platform-tools;
           fi
 
-        - if [ ! -d ~/.gradle/wrapper/dists/gradle-3.3-all ];
+        - if [ ! -d ~/.gradle/wrapper/dists/gradle-4.1-all ];
             then echo y | ./gradlew --version;
           fi
 
@@ -50,7 +50,7 @@ dependencies:
         - /usr/local/android-sdk-linux/extras
         - /usr/local/android-sdk-linux/tools
         - /usr/local/android-sdk-linux/platforms/android-25
-        - /usr/local/android-sdk-linux/build-tools/26.0.2
+        - /usr/local/android-sdk-linux/build-tools/26.0.3
         - /usr/local/android-sdk-linux/platform-tools
         - ~/.gradle
 test:
