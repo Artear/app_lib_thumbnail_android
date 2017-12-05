@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.1.4'
+    libraryVersion = '0.1.5'
 
     developerId = 'artear'
     developerName = 'Artear Moviles'
@@ -27,12 +27,12 @@ ext {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.2"
+    buildToolsVersion "26.0.3"
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
+        versionCode 3
         versionName "beta"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -51,7 +51,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     testCompile 'junit:junit:4.12'
     compile 'org.jetbrains:annotations-java5:15.0'
 }
@@ -133,7 +133,7 @@ bintray {
     try {
 
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    } catch (Exception exception) {
+    } catch (Exception ignored) {
     }
     user = properties.stringPropertyNames().contains('bintray.user') ?
             properties.getProperty('bintray.user') : System.getenv('BINTRAY_USER')
