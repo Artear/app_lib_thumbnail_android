@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.artear.app_library_android_cdnthumbnailkit">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".ThumbnailKitApp"
         android:allowBackup="true"

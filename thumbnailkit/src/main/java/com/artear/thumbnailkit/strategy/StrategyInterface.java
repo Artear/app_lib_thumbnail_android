@@ -30,7 +30,7 @@ public interface StrategyInterface {
      */
     CDNThumbnail getCDNThumbnail(int width, int height);
 
-    void add(CDNThumbnail cdnThumbnail);
+    void addCDNThumbnail(CDNThumbnail cdnThumbnail);
 
     void removeCDNThumbnail(CDNThumbnail cdnThumbnail);
 }
