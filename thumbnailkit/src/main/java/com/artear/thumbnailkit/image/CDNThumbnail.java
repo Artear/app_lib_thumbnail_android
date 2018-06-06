@@ -28,16 +28,14 @@ public class CDNThumbnail {
     public HashMap<String, String> params;
 
 
+    public CDNThumbnail(int width, int height) {
+        this(width, height, Types.center);
+    }
+
     public CDNThumbnail(int width, int height, Types type) {
         this(width, height, type, null);
     }
 
-    /**
-     * @param width
-     * @param height
-     * @param type
-     * @param params
-     */
     public CDNThumbnail(int width, int height, Types type, HashMap<String, String> params) {
         this.width = width;
         this.height = height;

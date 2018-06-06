@@ -60,6 +60,5 @@ public class DefaultStrategy implements StrategyInterface {
             }
         }
         return returns;
-
     }
 }
