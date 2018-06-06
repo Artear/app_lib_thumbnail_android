@@ -30,7 +30,12 @@ public interface StrategyInterface {
      */
     CDNThumbnail getCDNThumbnail(int width, int height);
 
-    void addCDNThumbnail(CDNThumbnail cdnThumbnail);
+    /**
+     * Aspect Ratio -> Height / Width
+     */
+    void addAspectRatio(int width, int height);
 
+
+    void addCDNThumbnail(CDNThumbnail cdnThumbnail);
     void removeCDNThumbnail(CDNThumbnail cdnThumbnail);
 }

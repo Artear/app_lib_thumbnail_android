@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         StrategyInterface cdnStrategy = new DefaultStrategy();
 
+
+        cdnStrategy.addAspectRatio(16, 9);
+        cdnStrategy.addAspectRatio(4, 3);
+        cdnStrategy.addAspectRatio(1, 1);
+
         //Aspect 1:1
         cdnStrategy.addCDNThumbnail(new CDNThumbnail(96, 96));
 

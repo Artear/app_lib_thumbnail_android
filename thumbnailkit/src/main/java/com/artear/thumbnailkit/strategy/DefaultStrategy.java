@@ -38,23 +38,15 @@ public class DefaultStrategy implements StrategyInterface {
     public DefaultStrategy() {
         aspectRatios = new ArrayList<>();
         this.cdnList = new HashMap<>();
-
-        addAspectRatio(1f);
-        addAspectRatio(16f / 9f);
-        addAspectRatio(9f / 16f);
-        addAspectRatio(4f / 3F);
-        addAspectRatio(3f / 4F);
-
-
     }
 
-    public void addAspectRatios(List<Float> aspectRatios) {
-        for (float aspectRatio : aspectRatios) {
-            addAspectRatio(aspectRatio);
-        }
+
+    @Override
+    public void addAspectRatio(int width, int height) {
+        addAspectRatio((float) height / (float) width);
     }
 
-    public void addAspectRatio(float aspectRatio) {
+    private void addAspectRatio(float aspectRatio) {
         if (!aspectRatios.contains(aspectRatio)) {
             aspectRatios.add(aspectRatio);
             cdnList.put(aspectRatio, new ArrayList<CDNThumbnail>());
@@ -66,7 +58,7 @@ public class DefaultStrategy implements StrategyInterface {
         float returns = 1;
         float aspectRatio = 1;
         if (cdnThumbnail.width != 0) {
-            aspectRatio = (float) cdnThumbnail.width / (float) cdnThumbnail.height;
+            aspectRatio = (float) cdnThumbnail.height / (float) cdnThumbnail.width;
         }
 
         if (aspectRatios.size() != 0) {
@@ -99,7 +91,7 @@ public class DefaultStrategy implements StrategyInterface {
     public CDNThumbnail getCDNThumbnail(int width, int height) {
         CDNThumbnail returns = null;
         if (width != 0) {
-            float aspectRatio = (float) width / (float) height;
+            float aspectRatio = getAspectRatio(new CDNThumbnail(width, height));
             List<CDNThumbnail> cdnThumbnails = cdnList.get(aspectRatio);
             if (cdnThumbnails.size() != 0) {
                 int bestWidthDiff = Integer.MAX_VALUE;
@@ -114,4 +106,5 @@ public class DefaultStrategy implements StrategyInterface {
         }
         return returns;
     }
+
 }
