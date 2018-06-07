@@ -29,13 +29,13 @@ import static java.lang.Math.abs;
  * Created by sergiobanares.
  */
 
-public class DefaultStrategy implements StrategyInterface {
+public class CDNStrategyDefault implements StrategyInterface {
 
     private HashMap<Float, List<CDNThumbnail>> cdnList;
 
     private List<Float> aspectRatios;
 
-    public DefaultStrategy() {
+    public CDNStrategyDefault() {
         aspectRatios = new ArrayList<>();
         this.cdnList = new HashMap<>();
     }

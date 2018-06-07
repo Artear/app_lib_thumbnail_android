@@ -9,7 +9,7 @@ import android.util.Log;
 import com.artear.app_library_android_cdnthumbnailkit.recycler.RecyclerAdapter;
 import com.artear.thumbnailkit.image.CDNImage;
 import com.artear.thumbnailkit.image.CDNThumbnail;
-import com.artear.thumbnailkit.strategy.DefaultStrategy;
+import com.artear.thumbnailkit.strategy.CDNStrategyConnection;
 import com.artear.thumbnailkit.strategy.StrategyInterface;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* // Default Template // */
 
-        StrategyInterface cdnStrategy = new DefaultStrategy();
+        StrategyInterface cdnStrategy = new CDNStrategyConnection(this);
 
 
         cdnStrategy.addAspectRatio(16, 9);
