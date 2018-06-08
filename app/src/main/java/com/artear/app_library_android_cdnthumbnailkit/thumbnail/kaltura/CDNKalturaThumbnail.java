@@ -1,4 +1,4 @@
-package com.artear.app_library_android_cdnthumbnailkit.CDNThumbnail.kaltura;
+package com.artear.app_library_android_cdnthumbnailkit.thumbnail.kaltura;
 
 import android.net.Uri;
 

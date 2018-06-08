@@ -1,10 +1,25 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.15"
+    }
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka-android'
 
 ext {
     bintrayRepo = 'Android'
-    bintrayName = 'com.artear.thumbnailkit'
+    bintrayName = 'CDNThumbnailKit'
 
     publishedGroupId = 'com.artear.thumbnailkit'
     libraryName = 'CDNThumbnailKit'
@@ -15,7 +30,7 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.1.5'
+    libraryVersion = '0.2.0'
 
     developerId = 'artear'
     developerName = 'Artear Moviles'
@@ -26,14 +41,14 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 3
-        versionName "beta"
+        targetSdkVersion 27
+        versionCode 4
+        versionName "ThumbnailKit"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -46,16 +61,22 @@ android {
     }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    testCompile 'junit:junit:4.12'
-    compile 'org.jetbrains:annotations-java5:15.0'
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
 }
 
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.artear.tools:tools:0.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
 
 group = publishedGroupId  // Maven Group ID for the artifact
 
@@ -99,20 +120,24 @@ install {
 
 version = libraryVersion
 
-if (project.hasProperty("android")) { // Android libraries
+if (project.hasProperty("kotlin")) { //Kotlin libraries
     task sourcesJar(type: Jar) {
         classifier = 'sources'
         from android.sourceSets.main.java.srcDirs
     }
 
-    task javadoc(type: Javadoc) {
+    task javadoc(type: Javadoc, dependsOn: dokka) {
+
+    }
+} else if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc, dependsOn: dokka) {
         source = android.sourceSets.main.java.srcDirs
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-} else { // Java libraries
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
     }
 }
 

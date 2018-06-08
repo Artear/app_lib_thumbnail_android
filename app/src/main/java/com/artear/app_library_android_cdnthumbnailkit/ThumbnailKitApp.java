@@ -2,7 +2,7 @@ package com.artear.app_library_android_cdnthumbnailkit;
 
 import android.app.Application;
 
-import com.artear.app_library_android_cdnthumbnailkit.CDNThumbnail.kaltura.CDNKalturaThumbnail;
+import com.artear.app_library_android_cdnthumbnailkit.thumbnail.kaltura.CDNKalturaThumbnail;
 import com.artear.thumbnailkit.CDNThumbnailKit;
 
 /**
