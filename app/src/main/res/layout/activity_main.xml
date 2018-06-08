@@ -6,9 +6,20 @@
     android:orientation="vertical"
     tools:context="com.artear.app_library_android_cdnthumbnailkit.MainActivity">
 
+    <TextView
+        android:id="@+id/reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:background="#ccc"
+        android:padding="8dp"
+        android:text="RELOAD" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/thumbnail_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
 </LinearLayout>
