@@ -84,10 +84,16 @@ jobs:
   bintray:
     <<: *defaults
     steps:
+      - restore_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
+          name: install
           command: ./gradlew install
-                   ./gradlew bintrayUpload
-
+      - run:
+          name: bintrayUpload
+          command: ./gradlew bintrayUpload
 
 workflows:
   version: 2

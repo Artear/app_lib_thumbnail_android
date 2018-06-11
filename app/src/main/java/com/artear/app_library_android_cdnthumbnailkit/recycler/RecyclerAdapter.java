@@ -12,15 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.artear.app_library_android_cdnthumbnailkit.ItemData;
 import com.artear.app_library_android_cdnthumbnailkit.R;
 
 import java.io.InputStream;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<String> data;
+    private List<ItemData> data;
 
-    public RecyclerAdapter(List<String> images) {
+    public RecyclerAdapter(List<ItemData> images) {
         data = images;
     }
 
@@ -37,7 +38,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         RecyclerViewHolder _holder = (RecyclerViewHolder) holder;
         _holder.imageView.setImageDrawable(null);
-        new DownloadImageTask(_holder.imageView).execute(data.get(position));
+
+        String size = "Size: width: " + data.get(position).getSize().getWidth() +
+                " height: " + data.get(position).getSize().getHeight();
+
+        String type = "Type: " + data.get(position).getConnectionType();
+
+        String imageInfo = type + "\n" + size;
+
+        _holder.textView.setText(imageInfo);
+        new DownloadImageTask(_holder.imageView).execute(data.get(position).getUrl());
 
     }
 
