@@ -1,5 +1,5 @@
 # ThumbnailKit
-ThumbnailKit Lib
+ThumbnailKit Library
 
 
 Download
@@ -10,13 +10,21 @@ via Maven:
 <dependency>
   <groupId>com.artear.thumbnailkit</groupId>
   <artifactId>thumbnailkit</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.artear.thumbnailkit:thumbnailkit:0.2.0'
+implementation 'com.artear.thumbnailkit:thumbnailkit:0.2.1'
 ```
+
+Requires:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
+
 Test Lib requires at minimum Java 7 or Android 4.1.
 
 License
