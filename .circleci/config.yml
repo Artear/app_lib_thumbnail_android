@@ -6,7 +6,7 @@ defaults: &defaults
 
   environment:
       JVM_OPTS: -Xmx4g
-      APP_PATH: "thumbnailkit"
+      APP_PATH: thumbnailkit
 
 version: 2
 jobs:
