@@ -6,6 +6,7 @@ defaults: &defaults
 
   environment:
       JVM_OPTS: -Xmx4g
+      APP_PATH: "thumbnailkit"
 
 version: 2
 jobs:
@@ -49,17 +50,17 @@ jobs:
 
       - save_cache:
           paths:
-            - tools/build/outputs/aar
+            - "$APP_PATH/build/outputs/aar"
           key: aar-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       - store_artifacts:
-          path: tools/build/outputs/aar
+          path: "$APP_PATH/build/outputs/aar"
           destination: aar
       - save_cache:
           paths:
-            - tools/build/libs
+            - "$APP_PATH/build/libs"
           key: artifacts-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       - store_artifacts:
-          path: tools/build/libs
+          path: "$APP_PATH/build/libs"
           destination: libs
 
   tests:
@@ -103,7 +104,7 @@ jobs:
           name: Upload library to bintray
           command: ./gradlew bintrayUpload
       - store_artifacts:
-          path: tools/build/publications/Bintray
+          path: "$APP_PATH/build/publications/Bintray"
           destination: pom
 
 workflows:
