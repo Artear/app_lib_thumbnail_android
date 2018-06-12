@@ -8,14 +8,8 @@ import com.artear.tools.network.ConnectionUtil
 class CDNStrategyConnection(private val appContext: Context) : CDNStrategyDefault() {
 
     override fun getCDNThumbnail(width: Int, height: Int): CDNThumbnail? {
-        var newWidth = width
-        var newHeight = height
-
-        val connectionSize = getConnectionSize(newWidth, newHeight)
-        newWidth = connectionSize.width
-        newHeight = connectionSize.height
-
-        return super.getCDNThumbnail(newWidth, newHeight)
+        val connectionSize = getConnectionSize(width, height)
+        return super.getCDNThumbnail(connectionSize.width, connectionSize.height)
     }
 
 
