@@ -4,9 +4,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.15"
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
     }
 }
 
@@ -27,7 +27,7 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.2.1'
+    libraryVersion = '0.2.2'
     toolsVersion = "0.0.10"
 
     developerId = 'artear'
@@ -38,15 +38,27 @@ ext {
     allLicenses = ["Apache-2.0"]
 }
 
+static int getVersionCode(branch) {
+    def versionCodeCommand = "git rev-list --count " + branch
+    return versionCodeCommand.execute().text.trim().toInteger()
+}
+
+static def getBranchName() {
+    return "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+}
+
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
+    def branch = getBranchName()
+    def vCode = 0 + getVersionCode(branch)
+
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 4
-        versionName "ThumbnailKit"
+        versionCode vCode
+        versionName libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
