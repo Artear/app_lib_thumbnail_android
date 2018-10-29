@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.1.5'
+    libraryVersion = '0.1.6'
 
     developerId = 'artear'
     developerName = 'Artear Moviles'
@@ -26,13 +26,13 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 3
+        targetSdkVersion 28
+        versionCode 4
         versionName "beta"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -47,13 +47,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    testCompile 'junit:junit:4.12'
-    compile 'org.jetbrains:annotations-java5:15.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
 
 

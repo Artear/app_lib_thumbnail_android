@@ -10,12 +10,12 @@ via Maven:
 <dependency>
   <groupId>com.artear.thumbnailkit</groupId>
   <artifactId>thumbnailkit</artifactId>
-  <version>0.1.5</version>
+  <version>0.1.6</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.artear.thumbnailkit:thumbnailkit:0.1.5'
+compile 'com.artear.thumbnailkit:thumbnailkit:0.1.6'
 ```
 Test Lib requires at minimum Java 7 or Android 4.1.
 
