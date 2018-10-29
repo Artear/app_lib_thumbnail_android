@@ -27,8 +27,8 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.2.2'
-    toolsVersion = "0.0.10"
+    libraryVersion = '0.2.3'
+    toolsVersion = "0.0.12"
 
     developerId = 'artear'
     developerName = 'Artear Moviles'
@@ -48,15 +48,15 @@ static def getBranchName() {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
-
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    
     def branch = getBranchName()
     def vCode = 0 + getVersionCode(branch)
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode vCode
         versionName libraryVersion
 
@@ -74,13 +74,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //Test
+    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    testImplementation 'junit:junit:4.12'
-
-    implementation "com.artear.tools:tools:$toolsVersion"
+    //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Tools
+    api "com.artear.tools:tools:$toolsVersion"
 }
 
 group = publishedGroupId

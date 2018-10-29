@@ -2,16 +2,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+ext {
+    supportLibraryVersion = "28.0.0"
+    toolsVersion = "0.0.12"
+}
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.artear.app_library_android_cdnthumbnailkit"
         minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 2
-        versionName "2.1"
+        targetSdkVersion 28
+        versionCode 3
+        versionName "2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -23,24 +27,21 @@ android {
 }
 
 dependencies {
-
-}
-
-
-dependencies {
+    implementation project(path: ':thumbnailkit')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    //Test
+    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.artear.tools:tools:0.0.10'
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
+    //Support
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
 
-    testImplementation 'junit:junit:4.12'
-
-    implementation project(path: ':thumbnailkit')
-
+    //Tools
+    api "com.artear.tools:tools:$toolsVersion"
 }
