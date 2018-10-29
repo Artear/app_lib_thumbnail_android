@@ -1,10 +1,22 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
+    }
+}
+
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 ext {
     bintrayRepo = 'Android'
-    bintrayName = 'com.artear.thumbnailkit'
+    bintrayName = 'CDNThumbnailKit'
 
     publishedGroupId = 'com.artear.thumbnailkit'
     libraryName = 'CDNThumbnailKit'
@@ -15,7 +27,8 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.1.6'
+    libraryVersion = '0.2.2'
+    toolsVersion = "0.0.10"
 
     developerId = 'artear'
     developerName = 'Artear Moviles'
@@ -25,15 +38,27 @@ ext {
     allLicenses = ["Apache-2.0"]
 }
 
+static int getVersionCode(branch) {
+    def versionCodeCommand = "git rev-list --count " + branch
+    return versionCodeCommand.execute().text.trim().toInteger()
+}
+
+static def getBranchName() {
+    return "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+}
+
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
+    
+    def branch = getBranchName()
+    def vCode = 0 + getVersionCode(branch)
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 4
-        versionName "beta"
+        versionCode vCode
+        versionName libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -48,109 +73,18 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     testImplementation 'junit:junit:4.12'
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation "com.artear.tools:tools:$toolsVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-
-group = publishedGroupId  // Maven Group ID for the artifact
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                groupId publishedGroupId
-                artifactId artifact
-
-                // Add your description here
-                name libraryName
-                description libraryDescription
-                url siteUrl
-
-                // Set your license
-                licenses {
-                    license {
-                        name licenseName
-                        url licenseUrl
-                    }
-                }
-                developers {
-                    developer {
-                        id developerId
-                        name developerName
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-
-                }
-            }
-        }
-    }
-}
-
+group = publishedGroupId
 version = libraryVersion
 
-if (project.hasProperty("android")) { // Android libraries
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-} else { // Java libraries
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-
-bintray {
-
-    Properties properties = new Properties()
-    try {
-
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    } catch (Exception ignored) {
-    }
-    user = properties.stringPropertyNames().contains('bintray.user') ?
-            properties.getProperty('bintray.user') : System.getenv('BINTRAY_USER')
-    key = properties.stringPropertyNames().contains('bintray.apikey') ?
-            properties.getProperty('bintray.apikey') : System.getenv('BINTRAY_API_KEY')
-
-    configurations = ['archives']
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-        }
-    }
-}
+apply from: 'publication.gradle'
+apply from: 'bintray.gradle'

@@ -1,0 +1,24 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+bintray {
+    user = project.hasProperty('bintrayUser') ?: System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
+    publications = ['Bintray']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            name = this.version
+            desc = libraryDescription
+            released = new Date()
+            vcsTag = this.version
+        }
+    }
+}

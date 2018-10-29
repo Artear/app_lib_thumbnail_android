@@ -1,0 +1,133 @@
+
+defaults: &defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/android:api-27-alpha
+
+  environment:
+      JVM_OPTS: -Xmx4g
+
+version: 2
+jobs:
+
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - save_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/code
+
+  download_dependencies:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+  assemble:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+      - run:
+          name: Build
+          command: ./gradlew assemble
+
+      - save_cache:
+          paths:
+            - thumbnailkit/build/outputs/aar
+          key: aar-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - store_artifacts:
+          path: thumbnailkit/build/outputs/aar
+          destination: aar
+      - save_cache:
+          paths:
+            - thumbnailkit/build/libs
+          key: artifacts-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - store_artifacts:
+          path: thumbnailkit/build/libs
+          destination: libs
+
+  tests:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
+
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+
+      - store_test_results:
+          path: app/build/test-results
+
+  stable:
+    <<: *defaults
+    steps:
+      - run:
+          command: echo Library Stable
+
+
+  bintray:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - restore_cache:
+          key: aar-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: artifacts-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Upload library to bintray
+          command: ./gradlew bintrayUpload
+      - store_artifacts:
+          path: thumbnailkit/build/publications/Bintray
+          destination: pom
+
+workflows:
+  version: 2
+  assemble_and_test:
+    jobs:
+      - checkout_code
+      - download_dependencies:
+          requires:
+            - checkout_code
+      - assemble:
+          requires:
+            - download_dependencies
+      - tests:
+          requires:
+            - download_dependencies
+      - stable:
+          requires:
+            - assemble
+            - tests
+
+      - bintray:
+          filters:
+            branches:
+              only: master
+          requires:
+            - stable
