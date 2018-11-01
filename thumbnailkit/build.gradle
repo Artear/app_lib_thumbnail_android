@@ -27,9 +27,6 @@ ext {
     siteUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit'
     gitUrl = 'https://github.com/Artear/App_Library_ANDROID_CDNThumbnailKit.git'
 
-    libraryVersion = '0.2.3'
-    toolsVersion = "0.0.12"
-
     developerId = 'artear'
     developerName = 'Artear Moviles'
 
