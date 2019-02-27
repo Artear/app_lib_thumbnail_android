@@ -67,7 +67,7 @@ publishing {
         Bintray(MavenPublication) {
             artifact sourcesJar
             artifact javadocJar
-            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            artifact("$buildDir/outputs/aar/${project.getName()}-${version}.aar")
             groupId publishedGroupId
             artifactId artifact
             version this.version
