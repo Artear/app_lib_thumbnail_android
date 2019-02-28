@@ -25,7 +25,7 @@ android {
         versionCode vCode
         versionName libraryVersion
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -40,19 +40,21 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     //Test
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$junitVersion"
 
     //AndroidTest
-    androidTestImplementation "com.android.support.test:runner:$espressoRunnerVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //Support
-    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
-    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    //AndroidX
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
 
     //Tools
-    api "com.artear.tools:tools:$toolsVersion"
+    implementation "com.artear.tools:tools:$toolsVersion"
+    implementation "com.artear.networking:networking:$networkingVersion"
 }
