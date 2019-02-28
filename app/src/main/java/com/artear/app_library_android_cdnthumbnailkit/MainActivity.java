@@ -1,22 +1,23 @@
 package com.artear.app_library_android_cdnthumbnailkit;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.artear.app_library_android_cdnthumbnailkit.recycler.RecyclerAdapter;
+import com.artear.networking.util.ConnectionUtil;
 import com.artear.thumbnailkit.image.CDNImage;
 import com.artear.thumbnailkit.image.CDNThumbnail;
 import com.artear.thumbnailkit.strategy.CDNStrategyConnection;
 import com.artear.thumbnailkit.strategy.StrategyInterface;
 import com.artear.tools.media.Size;
-import com.artear.tools.network.ConnectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
