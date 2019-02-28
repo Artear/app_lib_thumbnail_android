@@ -20,7 +20,7 @@ android {
 
     defaultConfig {
         applicationId "com.artear.app_library_android_cdnthumbnailkit"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode vCode
         versionName libraryVersion
