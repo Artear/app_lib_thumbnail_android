@@ -10,12 +10,12 @@ via Maven:
 <dependency>
   <groupId>com.artear.thumbnailkit</groupId>
   <artifactId>thumbnailkit</artifactId>
-  <version>0.2.5</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.artear.thumbnailkit:thumbnailkit:0.2.5'
+implementation 'com.artear.thumbnailkit:thumbnailkit:0.3.0'
 ```
 
 Requires:

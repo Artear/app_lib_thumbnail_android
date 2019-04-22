@@ -5,6 +5,7 @@
 .DS_Store
 /build
 /captures
+.externalNativeBuild
 *.hprof
 *.p12
 /android-profile
