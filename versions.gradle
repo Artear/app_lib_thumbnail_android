@@ -44,10 +44,10 @@ buildscript {
         // ------------- Artear -------------
 
         // Tools
-        toolsVersion = '0.0.18'
+        toolsVersion = '0.0.19'
 
         // Networking
-        networkingVersion = '0.0.3'
+        networkingVersion = '0.0.4'
 
     }
 }

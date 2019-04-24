@@ -30,8 +30,7 @@ public interface CDNThumbnailInterface {
     boolean validate(String imageUrl);
 
     /**
-     *
-     * @param imageUrl base image url
+     * @param imageUrl  base image url
      * @param thumbnail Strategy to reformat url
      * @return image url modified
      */
