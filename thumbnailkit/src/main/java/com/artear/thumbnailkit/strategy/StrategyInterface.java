@@ -37,5 +37,6 @@ public interface StrategyInterface {
 
 
     void addCDNThumbnail(CDNThumbnail cdnThumbnail);
+
     void removeCDNThumbnail(CDNThumbnail cdnThumbnail);
 }

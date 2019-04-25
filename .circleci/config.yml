@@ -1,11 +1,10 @@
-
 defaults: &defaults
   working_directory: ~/code
   docker:
     - image: circleci/android:api-28-alpha
 
   environment:
-      JVM_OPTS: -Xmx4g
+    JVM_OPTS: -Xmx4g
 
 version: 2
 jobs:
@@ -26,22 +25,22 @@ jobs:
           key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
 
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "thumbnailkit/build.gradle" }}
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "thumbnailkit/build.gradle" }}
 
-  assemble:
+  release:
     <<: *defaults
     steps:
       - restore_cache:
           key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "thumbnailkit/build.gradle" }}
 
       - run:
           name: Build
@@ -68,18 +67,18 @@ jobs:
       - restore_cache:
           key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "thumbnailkit/build.gradle" }}
 
       - run:
           name: Run Tests
           command: ./gradlew lint test
 
       - store_artifacts:
-          path: app/build/reports
+          path: thumbnailkit/build/reports
           destination: reports
 
       - store_test_results:
-          path: app/build/test-results
+          path: thumbnailkit/build/test-results
 
   stable:
     <<: *defaults
@@ -88,13 +87,28 @@ jobs:
           command: echo Library Stable
 
 
+  check_dependencies:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "thumbnailkit/build.gradle" }}
+      - run:
+          name: Dependencies Check
+          command: ./gradlew dependencyUpdates -Drevision=release
+      - store_artifacts:
+          path: thumbnailkit/build/dependencyUpdates/report.txt
+          destination: dependencies/checks.txt
+
+
   bintray:
     <<: *defaults
     steps:
       - restore_cache:
           key: checkout-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "thumbnailkit/build.gradle" }}
       - restore_cache:
           key: aar-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -114,7 +128,10 @@ workflows:
       - download_dependencies:
           requires:
             - checkout_code
-      - assemble:
+      - release:
+          requires:
+            - download_dependencies
+      - check_dependencies:
           requires:
             - download_dependencies
       - tests:
@@ -122,7 +139,7 @@ workflows:
             - download_dependencies
       - stable:
           requires:
-            - assemble
+            - release
             - tests
 
       - bintray:

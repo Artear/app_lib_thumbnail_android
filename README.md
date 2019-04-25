@@ -10,12 +10,12 @@ via Maven:
 <dependency>
   <groupId>com.artear.thumbnailkit</groupId>
   <artifactId>thumbnailkit</artifactId>
-  <version>0.2.5</version>
+  <version>0.3.1</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.artear.thumbnailkit:thumbnailkit:0.2.5'
+implementation 'com.artear.thumbnailkit:thumbnailkit:0.3.1'
 ```
 
 Requires:
@@ -30,7 +30,7 @@ Test Lib requires at minimum Java 7 or Android 4.1.
 License
 =======
 
-    Copyright 2017 Artear S.A.
+    Copyright 2019 Artear S.A.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

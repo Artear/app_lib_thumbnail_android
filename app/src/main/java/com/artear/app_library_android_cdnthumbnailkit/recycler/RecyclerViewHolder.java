@@ -4,9 +4,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.artear.app_library_android_cdnthumbnailkit.R;
-
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.artear.app_library_android_cdnthumbnailkit.R;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 

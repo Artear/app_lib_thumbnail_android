@@ -41,20 +41,19 @@ dependencies {
 
     //Test
     testImplementation "junit:junit:$junitVersion"
-
-    //AndroidTest
-    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$testCoreVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 
     //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation "com.google.android.material:material:$materialVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
     //AndroidX
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
 
-    //Tools
+    //Artear
     implementation "com.artear.tools:tools:$toolsVersion"
     implementation "com.artear.networking:networking:$networkingVersion"
+
 }

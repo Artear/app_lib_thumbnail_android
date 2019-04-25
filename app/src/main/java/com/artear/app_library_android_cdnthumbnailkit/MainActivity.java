@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.artear.app_library_android_cdnthumbnailkit.recycler.RecyclerAdapter;
 import com.artear.networking.util.ConnectionUtil;
 import com.artear.thumbnailkit.image.CDNImage;
@@ -15,15 +19,12 @@ import com.artear.tools.media.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 public class MainActivity extends AppCompatActivity {
 
 
     RecyclerAdapter adapter;
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

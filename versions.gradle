@@ -1,29 +1,53 @@
 buildscript {
     ext {
 
-        // ------------ Kotlin --------------
+        // -------- Library Version ---------
+        libraryVersion = '0.3.1'
 
-        kotlin_version = '1.3.21'
+
+        // ------------ Kotlin --------------
+        kotlin_version = '1.3.30'
+        kotlinVersion = kotlin_version
+
+
+        // ------------ Gradle --------------
+        gradle_build_version = '3.3.2'
+
+
+        // ------------ Bintray -------------
+        bintrayVersion = '1.8.4'
+
+
+        // ------------ Dokka ---------------
+        dokkaVersion = '0.9.18'
+
+
+        // ---------- dcendents -------------
+        dcendentsVersion = '2.1'
+
 
         // ------------- Test ---------------
-
         junitVersion = '4.12'
         testRunnerVersion = '1.1.1'
-        extJunitVersion = '1.1.0'
         espressoCoreVersion = '3.1.1'
+        testCoreVersion = '1.1.0'
+
 
         // ----------- Framework ------------
+        // AndroidX
+        appCompatVersion = '1.0.2'
+
 
         // Material
         materialVersion = '1.0.0'
 
-        // AndroidX
-        appCompatVersion = '1.0.2'
-
         // ------------- Artear -------------
 
-        //Tools
-        toolsVersion = '0.0.18'
-        networkingVersion = '0.0.3'
+        // Tools
+        toolsVersion = '0.0.19'
+
+        // Networking
+        networkingVersion = '0.0.4'
+
     }
 }
