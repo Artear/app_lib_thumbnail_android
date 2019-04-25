@@ -2,7 +2,7 @@ buildscript {
     ext {
 
         // -------- Library Version ---------
-        libraryVersion = '0.3.0'
+        libraryVersion = '0.3.1'
 
 
         // ------------ Kotlin --------------
